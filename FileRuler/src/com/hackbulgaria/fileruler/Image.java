@@ -36,11 +36,4 @@ public class Image {
 		
 		return null;
 	}
-	
-	
-	
-	
-	
-
-
 }
