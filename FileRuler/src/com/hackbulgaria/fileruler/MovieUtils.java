@@ -4,7 +4,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Reader;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
 
@@ -17,21 +16,6 @@ class MovieUtils {
 
         String search = String.format("%s%s", name, " imdb");
         String charset = "UTF-8";
-
-        try {
-            URL newURL = new URL("http://ajax.googleapis.com/ajax/services/search/web?v=1.0&q="
-                    + name.replace(" ", "+") + "+imdb");
-            BufferedReader in = new BufferedReader(new InputStreamReader(newURL.openStream()));
-
-            String inputLine;
-            while ((inputLine = in.readLine()) != null)
-                System.out.println(inputLine);
-            in.close();
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
 
         try {
             URL url = new URL(google + URLEncoder.encode(search, charset));
