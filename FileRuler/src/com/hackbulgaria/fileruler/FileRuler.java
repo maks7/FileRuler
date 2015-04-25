@@ -20,6 +20,7 @@ public class FileRuler extends JFrame {
     }
 
     public static void main(String[] args) throws IOException {
+
         EventQueue.invokeLater(new Runnable() {
 
             public void run() {
