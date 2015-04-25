@@ -34,10 +34,10 @@ public class FileRuler extends JFrame {
             System.out.println(string);
         }
 
-        new MovieFactory("/home/stoilov/Downloads").generateAllMovies();
+        new MovieFactory("D:\\Downloads\\testMovies").generateAllMovies();
 
         for (Movie m : MoviesCollecion.movieCollection) {
-            System.out.println(m.name + " [ " + m.actors + " ]");
+            System.out.println(m.getName() + " [ " + m.getActors() + " ]" + m.getYearOfRelease());
         }
 
         String searchPhrase = "Vin Diesel";
