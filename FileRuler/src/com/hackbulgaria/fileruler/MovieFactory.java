@@ -3,6 +3,7 @@ package com.hackbulgaria.fileruler;
 import java.io.File;
 import java.io.FilePermission;
 import java.net.URI;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 
@@ -18,6 +19,7 @@ public class MovieFactory extends Thread {
 	String name;
 	JSONObject movieContent;
 	String fileName;
+	Path filePath;
 
 	public MovieFactory(String filePathAndName) {
 		super(filePathAndName);
@@ -27,6 +29,8 @@ public class MovieFactory extends Thread {
 	public void run() {
 		// String fileName = new
 		// File(Paths.get(URI.create(getName()))).getName();
+		
+		filePath = Paths.get(new URI(getName()));
 		fileName = new File(getName()).getName();
 		fileName = fileName.substring(0, fileName.lastIndexOf('.'));
 		movieContent = MovieUtils.getMovieContent(fileName);
