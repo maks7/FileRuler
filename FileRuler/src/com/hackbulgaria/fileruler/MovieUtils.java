@@ -60,5 +60,7 @@ class MovieUtils {
             content.append(currentLine);
             currentLine = reader.readLine();
         }
+
+        return content.toString();
     }
 }
