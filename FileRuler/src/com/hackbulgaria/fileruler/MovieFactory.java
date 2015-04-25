@@ -1,15 +1,17 @@
 package com.hackbulgaria.fileruler;
 
 import java.io.File;
-import java.io.FilePermission;
 import java.net.URI;
+import java.net.URISyntaxException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
+import java.io.IOException;
 
-import org.json.*;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class MovieFactory extends Thread {
+
 	String actors;
 	String scenarist;
 	String director;
@@ -27,22 +29,33 @@ public class MovieFactory extends Thread {
 
 	@Override
 	public void run() {
-		// String fileName = new
-		// File(Paths.get(URI.create(getName()))).getName();
-		
-		filePath = Paths.get(new URI(getName()));
+
 		fileName = new File(getName()).getName();
 		fileName = fileName.substring(0, fileName.lastIndexOf('.'));
-		movieContent = MovieUtils.getMovieContent(fileName);
-		name = movieContent.getString("Title");
-		yearOfRelease = movieContent.getString("Year");
-		actors = movieContent.getString("Actors");
-		scenarist = movieContent.getString("Writer");
-		director = movieContent.getString("Director");
-		runtime = movieContent.getString("Runtime");
-		ganre = movieContent.getString("Genre");
+
+		try {
+			filePath = Paths.get(new URI(getName()));
+			movieContent = new JSONObject(MovieUtils.getMovieContent(fileName));
+			name = movieContent.getString("Title");
+			yearOfRelease = movieContent.getString("Year");
+			actors = movieContent.getString("Actors");
+			scenarist = movieContent.getString("Writer");
+			director = movieContent.getString("Director");
+			runtime = movieContent.getString("Runtime");
+			ganre = movieContent.getString("Genre");
+		} catch (JSONException e) {
+			System.out.println(e.getMessage());
+			e.printStackTrace();
+		} catch (IOException e) {
+			System.out.println(e.getMessage());
+			e.printStackTrace();
+		} catch (URISyntaxException e) {
+			System.out.println(e.getMessage());
+			e.printStackTrace();
+		}
+
 		MoviesCollecion.movieCollection.add(new Movie(name, yearOfRelease,
-				actors, scenarist, director, runtime, ganre));
+				actors, scenarist, director, runtime, ganre, filePath));
 
 	}
 

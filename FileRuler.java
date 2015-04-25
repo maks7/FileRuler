@@ -1,4 +1,3 @@
-
 package com.hackbulgaria.fileruler;
 
 import java.awt.BorderLayout;
@@ -76,12 +75,9 @@ public class FileRuler extends JFrame {
         btnOpen.setBounds(526, 110, 89, 23);
         contentPane.add(btnOpen);
         
-        JComboBox comboBox = new JComboBox();
+        JComboBox<String> comboBox = new JComboBox<>();
         comboBox.setModel(new DefaultComboBoxModel(new String[] {"Films", "Images"}));
         comboBox.setBounds(39, 85, 159, 20);
         contentPane.add(comboBox);
     }
 }
-
-
-
