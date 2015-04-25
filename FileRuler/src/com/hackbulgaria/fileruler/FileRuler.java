@@ -23,12 +23,7 @@ public class FileRuler extends JFrame {
      * Launch the application.
      */
     public static void main(String[] args) {
-<<<<<<< HEAD
-
         new CrawlFiles(Paths.get("D:\\Downloads\\testMovies")).crawl();
-=======
-        new CrawlFiles(Paths.get("/home/stoilov/Downloads")).crawl();
->>>>>>> cb5d3707dc0b0a90e234c19da6b2b6ae25cc7249
         // Linux - new CrawlFiles(Paths.get("/")).crawl();
 
         for (String string : HDDCrawler.listOfMovies) {

@@ -7,13 +7,8 @@ import java.nio.file.Paths;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-<<<<<<< HEAD
 public class MovieFactory {
-=======
 
-public class MovieFactory extends Thread{
-
->>>>>>> cb5d3707dc0b0a90e234c19da6b2b6ae25cc7249
     String path;
 
     String actors;
