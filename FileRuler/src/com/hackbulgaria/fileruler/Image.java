@@ -1,4 +1,4 @@
-package fileSystemCrawler;
+package com.hackbulgaria.fileruler;
 
 import java.nio.file.Path;
 import java.util.ArrayList;

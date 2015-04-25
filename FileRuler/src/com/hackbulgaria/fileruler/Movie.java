@@ -1,4 +1,4 @@
-package fileSystemCrawler;
+package com.hackbulgaria.fileruler;
 
 public class Movie {
 
