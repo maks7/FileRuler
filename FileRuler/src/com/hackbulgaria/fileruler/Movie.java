@@ -25,4 +25,50 @@ public class Movie {
 		this.ganre = ganre;
 		this.filePath = filePath;
 	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public String getYearOfRelease() {
+		return yearOfRelease;
+	}
+
+	public String getActors() {
+		return actors;
+	}
+
+	public String getScenarist() {
+		return scenarist;
+	}
+
+	public String getDirector() {
+		return director;
+	}
+
+	public String getRuntime() {
+		return runtime;
+	}
+
+	public String getGanre() {
+		return ganre;
+	}
+
+	public Path getFilePath() {
+		return filePath;
+	}
+	
+	public String toString() {
+		return String.format("%s %s %s %s %s %s %s", /*getId(), */getName(),
+				getYearOfRelease(), getActors(), getScenarist(),
+				getDirector(), getRuntime(), getGanre());
+	}
 }
