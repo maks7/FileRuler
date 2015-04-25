@@ -12,10 +12,10 @@ import com.google.gson.Gson;
 
 class MovieUtils {
 
-    private static String getIMDBid(String name) throws IOException {
+    private static String getIMDBid(Movie movie) throws IOException {
         String google = "http://ajax.googleapis.com/ajax/services/search/web?v=1.0&q=";
 
-        String search = name + " imdb";
+        String search = movie.getName() + " imdb";
         String charset = "UTF-8";
 
         URL url = new URL(google + URLEncoder.encode(search, charset));
@@ -27,20 +27,10 @@ class MovieUtils {
         return foundedUrl.substring(foundedUrl.indexOf("title/") + 6, foundedUrl.length() - 1);
     }
 
-    public static ArrayList<String> getActors(String name) throws IOException {
-        String imdbID = getIMDBid(name);
+    public static ArrayList<String> getActors(Movie movie) throws IOException {
         ArrayList<String> actors = new ArrayList<String>();
 
-        URL url = new URL("http://www.omdbapi.com/?i=" + imdbID + "&plot=short&r=json");
-        BufferedReader reader = new BufferedReader(new InputStreamReader(url.openStream()));
-
-        StringBuilder content = new StringBuilder();
-        String currentLine = reader.readLine();
-
-        while (currentLine != null) {
-            content.append(currentLine);
-            currentLine = reader.readLine();
-        }
+        String content = getMovieContent(movie);
 
         String actorsRawData = content.substring(content.indexOf("\"Actors\":\"") + 10, content.indexOf("\",\"Plot\""));
 
@@ -51,10 +41,16 @@ class MovieUtils {
         return actors;
     }
 
-    public static String getDirector(String name) throws IOException {
-        String imdbID = getIMDBid(name);
+    public static String getDirector(Movie movie) throws IOException {
+        String content = getMovieContent(movie);
 
-        URL url = new URL("http://www.omdbapi.com/?i=" + imdbID + "&plot=short&r=json");
+        String director = content.substring(content.indexOf("\"Director\"") + 12, content.indexOf("\",\"Writer\""));
+
+        return director;
+    }
+
+    public static String getMovieContent(Movie movie) {
+        URL url = new URL("http://www.omdbapi.com/?i=" + getIMDBid(movie) + "&plot=short&r=json");
         BufferedReader reader = new BufferedReader(new InputStreamReader(url.openStream()));
 
         StringBuilder content = new StringBuilder();
@@ -64,9 +60,5 @@ class MovieUtils {
             content.append(currentLine);
             currentLine = reader.readLine();
         }
-
-        String director = content.substring(content.indexOf("\"Director\"") + 12, content.indexOf("\",\"Writer\""));
-
-        return director;
     }
 }

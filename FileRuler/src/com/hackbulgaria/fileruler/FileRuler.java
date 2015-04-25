@@ -20,11 +20,6 @@ public class FileRuler extends JFrame {
     }
 
     public static void main(String[] args) throws IOException {
-
-        String movie = "Arrow";
-        System.out.println("Actors - " + MovieUtils.getActors(movie));
-        System.out.println("Director - " + MovieUtils.getDirector(movie));
-
         EventQueue.invokeLater(new Runnable() {
 
             public void run() {
