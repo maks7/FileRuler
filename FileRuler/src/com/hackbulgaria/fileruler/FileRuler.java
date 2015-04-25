@@ -23,10 +23,9 @@ public class FileRuler extends JFrame {
      * Launch the application.
      */
     public static void main(String[] args) {
+
         new CrawlFiles(Paths.get("D:\\Downloads\\testMovies")).crawl();
         // Linux - new CrawlFiles(Paths.get("/")).crawl();
-
-        // new MovieFactory("D:\\Downloads").generateAllMovies();
 
         for (String string : HDDCrawler.listOfMovies) {
             System.out.println(string);
@@ -41,6 +40,10 @@ public class FileRuler extends JFrame {
         for (Movie m : MoviesCollecion.movieCollection) {
             System.out.println(m.name + " [ " + m.actors + " ]");
         }
+
+        String searchPhrase = "Vin Diesel";
+        DoSearch search = new DoSearch(searchPhrase);
+        search.search(MovieFactory.movieCollection);
 
         EventQueue.invokeLater(new Runnable() {
             public void run() {

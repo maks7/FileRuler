@@ -21,13 +21,17 @@ class MovieUtils {
             URL url = new URL(google + URLEncoder.encode(search, charset));
             Reader reader = new InputStreamReader(url.openStream(), charset);
             GoogleResults results = new Gson().fromJson(reader, GoogleResults.class);
+            reader.close();
+
+            System.out.println(results.toString());
+
+            Thread.sleep(3000);
 
             if (results.getResponseData() == null) {
                 return null;
             }
 
             String foundedUrl = results.getResponseData().getResults().get(0).getUrl();
-            reader.close();
 
             if (foundedUrl == null || !results.getResponseData().getResults().get(0).getTitle().contains("IMDb")) {
                 return null;
@@ -36,6 +40,7 @@ class MovieUtils {
             return foundedUrl.substring(foundedUrl.indexOf("title/") + 6, foundedUrl.length() - 1);
         } catch (Exception e) {
             System.out.println(e.getMessage());
+            e.printStackTrace();
         }
 
         return null;
@@ -43,6 +48,7 @@ class MovieUtils {
 
     public static String getMovieContent(String name) {
         String id = getIMDBid(name);
+
         if (id == null) {
             return null;
         }

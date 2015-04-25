@@ -7,8 +7,7 @@ import java.nio.file.Paths;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class MovieFactory extends Thread {
-
+public class MovieFactory {
     String path;
 
     String actors;
@@ -22,21 +21,22 @@ public class MovieFactory extends Thread {
     String fileName;
     Path filePath;
 
+    static MoviesCollecion movieCollection = new MoviesCollecion();
+
     public MovieFactory(String filePathAndName) {
         path = filePathAndName;
     }
 
-    @Override
     public void run() {
 
         fileName = new File(path).getName();
         fileName = fileName.substring(0, fileName.lastIndexOf('.'));
 
         try {
-            filePath = Paths.get(path);
-
             String content = MovieUtils.getMovieContent(fileName);
+
             if (content != null) {
+                filePath = Paths.get(path);
                 movieContent = new JSONObject(content);
                 name = movieContent.getString("Title");
                 yearOfRelease = movieContent.getString("Year");
@@ -46,11 +46,11 @@ public class MovieFactory extends Thread {
                 runtime = movieContent.getString("Runtime");
                 ganre = movieContent.getString("Genre");
 
-                MoviesCollecion.movieCollection.add(new Movie(name, yearOfRelease, actors, scenarist, director,
-                        runtime, ganre, filePath));
+                movieCollection.add(new Movie(name, yearOfRelease, actors, scenarist, director, runtime, ganre,
+                        filePath));
             }
         } catch (JSONException e) {
-            System.out.println(e.getMessage());
+            System.out.println("json parse crashed");
             e.printStackTrace();
         } catch (Exception e) {
             System.out.println(e.getMessage());
