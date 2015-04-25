@@ -7,6 +7,7 @@ import java.nio.file.Paths;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+
 public class MovieFactory extends Thread{
 
     String path;
