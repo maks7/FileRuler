@@ -17,8 +17,6 @@ public class DoSearch {
 	}
 
 	public void search(MoviesCollecion collection) {
-		// TODO
-		// Find a way to give back the path to the files.
 
 		try {
 			// build a lucene index
@@ -27,7 +25,6 @@ public class DoSearch {
 			indexer.rebuildIndexes(collection);
 			System.out.println("rebuildIndexes done");
 
-			// perform search on "Notre Dame museum"
 			// and retrieve the top 100 result
 			System.out.println("performSearch");
 			SearchEngine se = new SearchEngine();
