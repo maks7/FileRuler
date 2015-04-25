@@ -5,5 +5,9 @@
 	<classpathentry kind="lib" path="lib/gson-2.2.4.jar"/>
 	<classpathentry kind="lib" path="lib/org.json-20120521.jar"/>
 	<classpathentry kind="lib" path="lib/commons-io-2.4.jar"/>
+	<classpathentry kind="lib" path="lib/lucene-analyzers-common-5.1.0.jar"/>
+	<classpathentry kind="lib" path="lib/lucene-core-5.1.0.jar"/>
+	<classpathentry kind="lib" path="lib/lucene-demo-5.1.0.jar"/>
+	<classpathentry kind="lib" path="lib/lucene-queryparser-5.1.0.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
