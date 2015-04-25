@@ -39,7 +39,7 @@ public class Indexer {
 
     public void indexMovie(Movie movie) throws IOException {
 
-        System.out.println("Indexing hotel: " + movie);
+        System.out.println("Indexing movie: " + movie);
         IndexWriter writer = getIndexWriter(false);
         Document doc = new Document();
         // doc.add(new StringField("id", movie.getId(), Field.Store.YES));
