@@ -37,7 +37,7 @@ public class HDDCrawler {
         return FilenameUtils.getExtension(filePathAndName);
     }
 
-    void fillTheCollection(String filePathAndName) {
+    public static void fillTheCollection(String filePathAndName) {
         String ext = getExtension(filePathAndName);
         if (isImageFormat(ext)) {
             listOfImages.add(filePathAndName);
