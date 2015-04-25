@@ -1,5 +1,9 @@
 package com.hackbulgaria.fileruler;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+
 import org.apache.lucene.document.Document;
 import org.apache.lucene.search.ScoreDoc;
 import org.apache.lucene.search.TopDocs;
@@ -16,7 +20,8 @@ public class DoSearch {
         this.searchPhrase = searchPhrase;
     }
 
-    public void search(MoviesCollecion collection) {
+    public ArrayList<Path> search(MoviesCollecion collection) {
+        ArrayList<Path> list = new ArrayList<Path>();
 
         try {
             // build a lucene index
@@ -32,17 +37,20 @@ public class DoSearch {
 
             System.out.println("Results found: " + topDocs.totalHits);
             ScoreDoc[] hits = topDocs.scoreDocs;
+
             for (int i = 0; i < hits.length; i++) {
                 Document doc = se.getDocument(hits[i].doc);
-                // System.out.println(doc.get("name") + " " + doc.get("actors")
-                // + " (" + hits[i].score + ")");
-                System.out.println(doc.get("path"));
 
+                // System.out.println(doc.get("path"));
+                list.add(Paths.get(doc.get("path")));
             }
             System.out.println("performSearch done");
         } catch (Exception e) {
             System.out.println("Exception caught.\n");
+            System.out.println(e.getStackTrace());
         }
+
+        return list;
     }
 
 }

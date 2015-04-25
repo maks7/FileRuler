@@ -3,7 +3,11 @@ package com.hackbulgaria.fileruler;
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
@@ -15,6 +19,8 @@ import javax.swing.JPanel;
 import javax.swing.JTextPane;
 import javax.swing.border.EmptyBorder;
 
+import org.apache.commons.io.FileUtils;
+
 public class FileRuler extends JFrame {
 
     private JPanel contentPane;
@@ -23,6 +29,17 @@ public class FileRuler extends JFrame {
      * Launch the application.
      */
     public static void main(String[] args) {
+        // Delete the previous requests
+        File requests = new File("index-directory");
+        if (requests.exists()) {
+            try {
+                FileUtils.deleteDirectory(requests);
+            } catch (IOException e) {
+                System.out.println(e.getMessage());
+                e.printStackTrace();
+            }
+        }
+
         new CrawlFiles(Paths.get("D:\\Downloads\\testMovies")).crawl();
         // Linux - new CrawlFiles(Paths.get("/")).crawl();
 
@@ -37,12 +54,16 @@ public class FileRuler extends JFrame {
         new MovieFactory("D:\\Downloads\\testMovies").generateAllMovies();
 
         for (Movie m : MoviesCollecion.movieCollection) {
-            System.out.println(m.getName() + " [ " + m.getActors() + " ]" + m.getYearOfRelease());
+            System.out.println(m.getName() + " " + m.getYearOfRelease() + " [ " + m.getActors() + " ]");
         }
 
         String searchPhrase = "Vin Diesel";
         DoSearch search = new DoSearch(searchPhrase);
-        search.search(MovieFactory.movieCollection);
+        ArrayList<Path> results = search.search(MovieFactory.movieCollection);
+
+        for (Path res : results) {
+            System.out.println(res);
+        }
 
         EventQueue.invokeLater(new Runnable() {
             public void run() {
