@@ -7,7 +7,7 @@ import java.nio.file.Paths;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class MovieFactory {
+public class MovieFactory extends Thread{
 
     String path;
 
@@ -26,6 +26,7 @@ public class MovieFactory {
         path = filePathAndName;
     }
 
+    @Override
     public void run() {
 
         fileName = new File(path).getName();

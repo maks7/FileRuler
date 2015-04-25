@@ -23,7 +23,7 @@ public class FileRuler extends JFrame {
      * Launch the application.
      */
     public static void main(String[] args) {
-        new CrawlFiles(Paths.get("D:\\Downloads\\testMovies")).crawl();
+        new CrawlFiles(Paths.get("/home/stoilov/Downloads")).crawl();
         // Linux - new CrawlFiles(Paths.get("/")).crawl();
 
         // new MovieFactory("D:\\Downloads").generateAllMovies();
@@ -36,7 +36,7 @@ public class FileRuler extends JFrame {
             System.out.println(string);
         }
 
-        new MovieFactory("D:\\Downloads\\testMovies").generateAllMovies();
+        new MovieFactory("/home/stoilov/Downloads").generateAllMovies();
 
         for (Movie m : MoviesCollecion.movieCollection) {
             System.out.println(m.name + " [ " + m.actors + " ]");
