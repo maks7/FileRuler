@@ -3,6 +3,7 @@ package com.hackbulgaria.fileruler;
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
+import java.nio.file.Paths;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
@@ -22,8 +23,24 @@ public class FileRuler extends JFrame {
      * Launch the application.
      */
     public static void main(String[] args) {
-        // Windows - new CrawlFiles(Paths.get("D:\\")).crawl();
+        new CrawlFiles(Paths.get("D:\\Downloads\\testMovies")).crawl();
         // Linux - new CrawlFiles(Paths.get("/")).crawl();
+
+        // new MovieFactory("D:\\Downloads").generateAllMovies();
+
+        for (String string : HDDCrawler.listOfMovies) {
+            System.out.println(string);
+        }
+
+        for (String string : HDDCrawler.listOfImages) {
+            System.out.println(string);
+        }
+
+        new MovieFactory("D:\\Downloads\\testMovies").generateAllMovies();
+
+        for (Movie m : MoviesCollecion.movieCollection) {
+            System.out.println(m.name + " [ " + m.actors + " ]");
+        }
 
         EventQueue.invokeLater(new Runnable() {
             public void run() {

@@ -11,7 +11,7 @@ import java.nio.file.attribute.BasicFileAttributes;
 
 public class CrawlFiles extends SimpleFileVisitor<Path> {
 
-    final private Path startingPath;
+    public final Path startingPath;
 
     public CrawlFiles(Path startingPath) {
         this.startingPath = startingPath;
