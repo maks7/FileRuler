@@ -10,8 +10,12 @@ public class WordMap{
 		words = new HashMap<String, Pair>();
 	}
 
-	public void addWord(Word word){
+	public void put(Word word){
 		words.put(word.getName(), word.getInfo());
+	}
+	
+	public Pair get(String word){
+		return words.get(word);
 	}
 
 	@SuppressWarnings("unchecked")

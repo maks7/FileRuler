@@ -20,4 +20,3 @@ public class TagInfo {
 		return rank;
 	}
 }
-
