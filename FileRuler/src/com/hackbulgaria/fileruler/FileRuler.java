@@ -3,18 +3,13 @@ package com.hackbulgaria.fileruler;
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
-<<<<<<< HEAD
-import java.awt.MediaTracker;
-import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-=======
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
->>>>>>> 78d3b8335289c1dc6ccad6c71c960d106332555f
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
@@ -25,11 +20,9 @@ import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JTextPane;
 import javax.swing.border.EmptyBorder;
-<<<<<<< HEAD
-=======
 
 import org.apache.commons.io.FileUtils;
->>>>>>> 78d3b8335289c1dc6ccad6c71c960d106332555f
+
 
 public class FileRuler extends JFrame {
 
@@ -149,7 +142,6 @@ public class FileRuler extends JFrame {
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         setContentPane(contentPane);
         contentPane.setLayout(null);
-<<<<<<< HEAD
         
       //  contentPane.add();
         contentPane.setBackground(new Color(153, 204, 255));;
@@ -161,9 +153,7 @@ public class FileRuler extends JFrame {
 //        bgimage = Toolkit.getDefaultToolkit().getImage(".\\res\backgr_images2.jpg");
 //        mt.addImage(bgimage, 0);
         
-=======
 
->>>>>>> 78d3b8335289c1dc6ccad6c71c960d106332555f
         JLabel lblSearch = new JLabel("Enter name:");
         lblSearch.setFont(new Font("Tahoma", Font.PLAIN, 12));
         lblSearch.setBounds(39, 29, 78, 14);
@@ -215,7 +205,6 @@ public class FileRuler extends JFrame {
               }
             };
             btnNewButton_1.addActionListener(btn1ActionListener);  
-
           
     }
     
