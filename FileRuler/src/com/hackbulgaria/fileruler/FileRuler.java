@@ -35,10 +35,6 @@ public class FileRuler extends JFrame {
     public static void main(String[] args) {
         loadLocalJSONs(Paths.get("test-data-json"));
 
-        for (Movie mov : MoviesCollecion.movieCollection) {
-            System.out.println(mov);
-        }
-
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
@@ -155,7 +151,7 @@ public class FileRuler extends JFrame {
         final JList<String> list = new JList(listModel);
         list.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
         list.setLayoutOrientation(JList.HORIZONTAL_WRAP);
-        list.setBounds(40, 130, 400, 300);
+        list.setBounds(40, 130, 600, 300);
         contentPane.add(list);
 
         JButton btnEdit = new JButton("Edit");
@@ -171,16 +167,6 @@ public class FileRuler extends JFrame {
         // Scan the entire db to collect data for movies and images
         btnNewButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                File requests = new File("index-directory");
-                if (requests.exists()) {
-                    try {
-                        FileUtils.deleteDirectory(requests);
-                    } catch (IOException ex) {
-                        System.out.println(ex.getMessage());
-                        ex.printStackTrace();
-                    }
-                }
-
                 // Change the root directory depends on the os
                 String rootDir = "test-data-films";
                 // if (new
@@ -199,6 +185,17 @@ public class FileRuler extends JFrame {
 
         btnNewButton_1.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                listModel.clear();
+                File requests = new File("index-directory");
+                if (requests.exists()) {
+                    try {
+                        FileUtils.deleteDirectory(requests);
+                    } catch (IOException ex) {
+                        System.out.println(ex.getMessage());
+                        ex.printStackTrace();
+                    }
+                }
+
                 String option = (String) comboBox.getSelectedItem();
 
                 switch (option) {
@@ -210,7 +207,7 @@ public class FileRuler extends JFrame {
                             ArrayList<Path> results = search.search(MovieFactory.movieCollection);
 
                             for (Path res : results) {
-                                listModel.addElement(res.toString());
+                                listModel.addElement(res.toAbsolutePath());
                             }
                         }
 
@@ -223,7 +220,7 @@ public class FileRuler extends JFrame {
                             ArrayList<Path> results = search.search(ImageFactory.imageCollection);
 
                             for (Path res : results) {
-                                listModel.addElement(res);
+                                listModel.addElement(res.toAbsolutePath());
                             }
                         }
 
