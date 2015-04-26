@@ -14,10 +14,14 @@ import org.apache.lucene.search.TopDocs;
  */
 public class DoSearch {
 
-    private String searchPhrase;
+    private ArrayList<String> phrases;
 
     public DoSearch(String searchPhrase) {
-        this.searchPhrase = searchPhrase;
+        String[] splited = searchPhrase.split(",");
+
+        for (int i = 0; i < splited.length; i++) {
+            this.phrases.add(splited[i]);
+        }
     }
 
     public ArrayList<Path> search(MoviesCollecion collection) {
@@ -31,9 +35,12 @@ public class DoSearch {
             System.out.println("rebuildIndexes --done");
 
             // and retrieve the top 100 result
-            System.out.println("performSearch on " + "\"" + searchPhrase + "\"");
+            System.out.println("performSearch on " + "\"" + this.phrases.toString() + "\"");
             SearchEngine se = new SearchEngine();
-            TopDocs topDocs = se.performSearch(searchPhrase, 100);
+            TopDocs topDocs = null;
+            for (int i = 0; i < this.phrases.size(); i++) {
+                topDocs = se.performSearch(this.phrases.get(i), 100);
+            }
 
             System.out.println("Results found: " + topDocs.totalHits);
             ScoreDoc[] hits = topDocs.scoreDocs;
