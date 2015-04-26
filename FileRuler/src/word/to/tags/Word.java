@@ -11,40 +11,35 @@ public class Word {
 	
 	public Word(String name){
 		this.name = name;
-	}
-	
-	public void addOcurrense(HashMap<String, Double> tags){
-		this.wordOccurence += 1;
-		Iterator<String> keys =  tags.keySet().iterator();
-		while(keys.hasNext()){
-			String tagName = keys.next();
-			this.addTag(tagName, tags.get(tagName));
-		}
+		TagInfo nameInfo = new TagInfo();
+		nameInfo.setRank(50);
+		tags.put(name, new TagInfo());
 	}
 	
 	public String getName(){
 		return this.name;
 	}
-	
+
 	public Pair getInfo(){
 		Pair info = new Pair(this.wordOccurence, this.tags);
 		return info;
 	}
 	
-	private double calculateOccurancePercentage(String tagName){
-		double delimeter = (double) this.wordOccurence / 100;
-		return (double)(this.tags.get(tagName).getOccurence())/delimeter;
-	}
-	
-	private double calculateExponent(double percentage){
-		for(int i = 0; i < exponents.length; i++){
-			if(percentage < exponents[0][i]){
-				return exponents[0][i];
-			}
+	public void addWordOcurrense(HashMap<String, Double> tags){
+		this.wordOccurence += 1;
+		Iterator<String> keys =  tags.keySet().iterator();
+		while(keys.hasNext()){
+			String tagName = keys.next();
+			if(!tagName.equals(this.name))
+				this.addTag(tagName, tags.get(tagName));
 		}
-		return 0;
 	}
 	
+	private void addTag(String tagName, double percentige){
+		tags.get(tagName).addOcuurence();
+		double recalculated = calculateRank(tagName, percentige);
+		tags.get(tagName).setRank(recalculated);
+	}
 	
 	private double calculateRank(String tagName, double percentige){
 		double tagOccurence = tags.get(tagName).getOccurence();
@@ -55,10 +50,19 @@ public class Word {
 		rank = (rank*tagOccurence + percentige) / this.wordOccurence;
 		return rank;
 	}
-	
-	private void addTag(String tagName, double percentige){
-		tags.get(tagName).addOcuurence();
-		double recalculated = calculateRank(tagName, percentige);
-		tags.get(tagName).setRank(recalculated);
+
+	private double calculateOccurancePercentage(String tagName){
+		double delimeter = (double) this.wordOccurence / 100;
+		return (double)(this.tags.get(tagName).getOccurence())/delimeter;
 	}
+	
+	private double calculateExponent(double percentage){
+	 	for(int i = 0; i < exponents.length; i++){
+			if(percentage < exponents[0][i]){
+				return exponents[0][i];
+			}
+		}
+		return 0;
+	}
+	
 }

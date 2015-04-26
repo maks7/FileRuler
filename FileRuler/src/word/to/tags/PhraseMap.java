@@ -31,14 +31,13 @@ public class PhraseMap {
 		Iterator<ArrayList<String>> iter = phrases.keySet().iterator();
 		HashMap<ArrayList<String>, HashMap<String, Double>> result = new HashMap<ArrayList<String>, HashMap<String, Double>>();
 		while(iter.hasNext()){
-			Pair combination = this.extractCombinations(list, iter.next());
-			if(combination != null){
-				result.put((ArrayList<String>)combination.at(0), (HashMap<String, Double>) combination.at(1));
+			Pair nameTagPair = this.extractCombinations(list, iter.next());
+			if(nameTagPair != null){
+				result.put((ArrayList<String>)nameTagPair.at(0), (HashMap<String, Double>) nameTagPair.at(1));
 			}
 		}
-		
-		return null;
+		return result;
 	}
 
-	
+
 }
