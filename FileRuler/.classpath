@@ -9,5 +9,6 @@
 	<classpathentry kind="lib" path="lib/lucene-queryparser-5.1.0.jar"/>
 	<classpathentry kind="lib" path="lib/org.json-20120521.jar"/>
 	<classpathentry kind="lib" path="lib/rt.jar"/>
+	<classpathentry kind="lib" path="lib/rita.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
