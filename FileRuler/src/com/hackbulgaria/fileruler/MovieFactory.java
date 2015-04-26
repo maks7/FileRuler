@@ -8,7 +8,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class MovieFactory {
-
     private String path;
 
     private String actors;

@@ -7,6 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
+import java.nio.charset.Charset;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -24,12 +25,19 @@ import javax.swing.ListSelectionModel;
 import javax.swing.border.EmptyBorder;
 
 import org.apache.commons.io.FileUtils;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class FileRuler extends JFrame {
 
     private JPanel contentPane;
 
     public static void main(String[] args) {
+        loadLocalJSONs(Paths.get("test-data-json"));
+
+        for (Movie mov : MoviesCollecion.movieCollection) {
+            System.out.println(mov);
+        }
 
         EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -41,6 +49,65 @@ public class FileRuler extends JFrame {
                 }
             }
         });
+    }
+
+    private static void loadLocalJSONs(Path p) {
+        try {
+            listFilesForFolder(p.toFile());
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
+
+    private static void listFilesForFolder(final File folder) throws IOException {
+        for (final File fileEntry : folder.listFiles()) {
+            if (fileEntry.isDirectory()) {
+                listFilesForFolder(fileEntry);
+            } else {
+                String path;
+
+                String actors;
+                String scenarist;
+                String director;
+                String runtime;
+                String ganre;
+                String yearOfRelease;
+                String name;
+                JSONObject movieContent;
+                String fileName;
+                Path filePath;
+
+                fileName = fileEntry.getName();
+                fileName = fileName.substring(0, fileName.lastIndexOf('.'));
+
+                try {
+
+                    String content = FileUtils.readFileToString(fileEntry, Charset.forName("UTF-8")).substring(1);
+
+                    if (content != null) {
+                        filePath = fileEntry.toPath();
+                        movieContent = new JSONObject(content);
+                        name = movieContent.getString("Title");
+                        yearOfRelease = movieContent.getString("Year");
+                        actors = movieContent.getString("Actors");
+                        scenarist = movieContent.getString("Writer");
+                        director = movieContent.getString("Director");
+                        runtime = movieContent.getString("Runtime");
+                        ganre = movieContent.getString("Genre");
+
+                        MoviesCollecion.movieCollection.add(new Movie(name, yearOfRelease, actors, scenarist, director,
+                                runtime, ganre, filePath));
+                    }
+                } catch (JSONException e) {
+                    System.out.println("json parse crashed");
+                    e.printStackTrace();
+                } catch (Exception e) {
+                    System.out.println(e.getMessage());
+                    e.printStackTrace();
+                }
+            }
+        }
     }
 
     public FileRuler() {
@@ -143,7 +210,7 @@ public class FileRuler extends JFrame {
                             ArrayList<Path> results = search.search(MovieFactory.movieCollection);
 
                             for (Path res : results) {
-                                listModel.addElement(res);
+                                listModel.addElement(res.toString());
                             }
                         }
 

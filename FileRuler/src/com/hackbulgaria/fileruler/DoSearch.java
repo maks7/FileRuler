@@ -13,6 +13,7 @@ public class DoSearch {
     private ArrayList<String> phrases;
 
     public DoSearch(String searchPhrase) {
+        phrases = new ArrayList<String>();
         String[] splited = searchPhrase.split(",");
 
         for (int i = 0; i < splited.length; i++) {
