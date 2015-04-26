@@ -17,88 +17,89 @@ import javax.swing.border.EmptyBorder;
 
 public class FileRuler extends JFrame {
 
-    private JPanel contentPane;
+	private JPanel contentPane;
 
-    /**
-     * Launch the application.
-     */
-    public static void main(String[] args) {
-        new CrawlFiles(Paths.get("D:\\Downloads\\testMovies")).crawl();
-        // Linux - new CrawlFiles(Paths.get("/")).crawl();
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		// new CrawlFiles(Paths.get("D:\\Downloads\\testMovies")).crawl();
+		new CrawlFiles(Paths.get("/home/stoilov/Downloads")).crawl();
 
-        for (String string : HDDCrawler.listOfMovies) {
-            System.out.println(string);
-        }
+		for (String string : HDDCrawler.listOfMovies) {
+			System.out.println(string);
+		}
 
-        for (String string : HDDCrawler.listOfImages) {
-            System.out.println(string);
-        }
+		for (String string : HDDCrawler.listOfImages) {
+			System.out.println(string);
+		}
 
-        new MovieFactory("/home/stoilov/Downloads").generateAllMovies();
+		new MovieFactory("/home/stoilov/Downloads").generateAllMovies();
 
-        for (Movie m : MoviesCollecion.movieCollection) {
-            System.out.println(m.name + " [ " + m.actors + " ]");
-        }
+		for (Movie m : MoviesCollecion.movieCollection) {
+			System.out.println(m.name + " [ " + m.actors + " ]");
+		}
 
-        String searchPhrase = "Vin Diesel";
-        DoSearch search = new DoSearch(searchPhrase);
-        search.search(MovieFactory.movieCollection);
+		String searchPhrase = "Vin Diesel";
+		DoSearch search = new DoSearch(searchPhrase);
+		search.search(MovieFactory.movieCollection);
 
-        EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                try {
-                    FileRuler frame = new FileRuler();
-                    frame.setVisible(true);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-    }
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					FileRuler frame = new FileRuler();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
 
-    /**
-     * Create the frame.
-     */
-    public FileRuler() {
-        setTitle("FileRuler");
-        setForeground(Color.YELLOW);
-        setLocationRelativeTo(null);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setBounds(200, 200, 650, 400);
-        contentPane = new JPanel();
-        contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-        setContentPane(contentPane);
-        contentPane.setLayout(null);
+	/**
+	 * Create the frame.
+	 */
+	public FileRuler() {
+		setTitle("FileRuler");
+		setForeground(Color.YELLOW);
+		setLocationRelativeTo(null);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(200, 200, 650, 400);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
 
-        JLabel lblSearch = new JLabel("Enter name:");
-        lblSearch.setFont(new Font("Tahoma", Font.PLAIN, 12));
-        lblSearch.setBounds(39, 29, 78, 14);
-        contentPane.add(lblSearch);
+		JLabel lblSearch = new JLabel("Enter name:");
+		lblSearch.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		lblSearch.setBounds(39, 29, 78, 14);
+		contentPane.add(lblSearch);
 
-        JTextPane textPane = new JTextPane();
-        textPane.setForeground(Color.BLACK);
-        textPane.setBounds(39, 54, 456, 20);
-        contentPane.add(textPane);
+		JTextPane textPane = new JTextPane();
+		textPane.setForeground(Color.BLACK);
+		textPane.setBounds(39, 54, 456, 20);
+		contentPane.add(textPane);
 
-        JButton btnNewButton = new JButton("Scan");
-        btnNewButton.setBounds(526, 11, 89, 23);
-        contentPane.add(btnNewButton);
+		JButton btnNewButton = new JButton("Scan");
+		btnNewButton.setBounds(526, 11, 89, 23);
+		contentPane.add(btnNewButton);
 
-        JButton btnNewButton_1 = new JButton("Find");
-        btnNewButton_1.setBounds(526, 51, 89, 23);
-        contentPane.add(btnNewButton_1);
+		JButton btnNewButton_1 = new JButton("Find");
+		btnNewButton_1.setBounds(526, 51, 89, 23);
+		contentPane.add(btnNewButton_1);
 
-        JList list = new JList();
-        list.setBounds(43, 113, 452, 219);
-        contentPane.add(list);
+		JList list = new JList();
+		list.setBounds(43, 113, 452, 219);
+		contentPane.add(list);
 
-        JButton btnOpen = new JButton("Open");
-        btnOpen.setBounds(526, 110, 89, 23);
-        contentPane.add(btnOpen);
+		JButton btnOpen = new JButton("Open");
+		btnOpen.setBounds(526, 110, 89, 23);
+		contentPane.add(btnOpen);
 
-        JComboBox comboBox = new JComboBox();
-        comboBox.setModel(new DefaultComboBoxModel(new String[] { "Films", "Images" }));
-        comboBox.setBounds(39, 85, 159, 20);
-        contentPane.add(comboBox);
-    }
+		JComboBox comboBox = new JComboBox();
+		comboBox.setModel(new DefaultComboBoxModel(new String[] { "Films",
+				"Images" }));
+		comboBox.setBounds(39, 85, 159, 20);
+		contentPane.add(comboBox);
+	}
 }
