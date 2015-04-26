@@ -23,6 +23,14 @@ import javax.swing.border.EmptyBorder;
 
 import org.apache.commons.io.FileUtils;
 
+import com.hackbulgaria.fileruler.CrawlFiles;
+import com.hackbulgaria.fileruler.DoSearch;
+import com.hackbulgaria.fileruler.HDDCrawler;
+import com.hackbulgaria.fileruler.Movie;
+import com.hackbulgaria.fileruler.MovieFactory;
+import com.hackbulgaria.fileruler.MoviesCollecion;
+import com.hackbulgaria.fileruler.Test_sw;
+
 
 public class FileRuler extends JFrame {
 
