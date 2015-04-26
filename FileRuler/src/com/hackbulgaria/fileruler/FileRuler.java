@@ -29,7 +29,45 @@ public class FileRuler extends JFrame {
      * Launch the application.
      */
     public static void main(String[] args) {
-        // Delete the previous requests
+        // File requests = new File("index-directory");
+        // if (requests.exists()) {
+        // try {
+        // FileUtils.deleteDirectory(requests);
+        // } catch (IOException e) {
+        // System.out.println(e.getMessage());
+        // e.printStackTrace();
+        // }
+        // }
+        //
+        // new
+        // CrawlFiles(Paths.get("C:\\Users\\PC190814\\Desktop\\New folder\\FileRuler\\FileRuler")).crawl();
+        // // Linux - new CrawlFiles(Paths.get("/")).crawl();
+        //
+        // for (String string : HDDCrawler.listOfMovies) {
+        // System.out.println(string);
+        // }
+        //
+        // for (String string : HDDCrawler.listOfImages) {
+        // System.out.println(string);
+        // }
+        //
+        // new
+        // MovieFactory("C:\\Users\\PC190814\\Desktop\\New folder\\FileRuler\\FileRuler").generateAllMovies();
+        //
+        // for (Movie m : MoviesCollecion.movieCollection) {
+        // System.out.println(m.getName() + " " + m.getYearOfRelease() + " [ " +
+        // m.getActors() + " ]");
+        // }
+        //
+        // String searchPhrase = "Paul Walker";
+        // DoSearch search = new DoSearch(searchPhrase);
+        // ArrayList<Path> results =
+        // search.search(MovieFactory.movieCollection);
+        //
+        // for (Path res : results) {
+        // System.out.println(res);
+        // }
+
         File requests = new File("index-directory");
         if (requests.exists()) {
             try {
@@ -40,8 +78,15 @@ public class FileRuler extends JFrame {
             }
         }
 
-        new CrawlFiles(Paths.get("D:\\Downloads\\testMovies")).crawl();
-        // Linux - new CrawlFiles(Paths.get("/")).crawl();
+        // Change the root directory depends on the os
+        String rootDir;
+        if (new String(System.getProperty("os.name")).toLowerCase().indexOf("win") >= 0) {
+            rootDir = "D:\\";
+        } else {
+            rootDir = "/";
+        }
+
+        new CrawlFiles(Paths.get(rootDir)).crawl();
 
         for (String string : HDDCrawler.listOfMovies) {
             System.out.println(string);
@@ -51,7 +96,7 @@ public class FileRuler extends JFrame {
             System.out.println(string);
         }
 
-        new MovieFactory("D:\\Downloads\\testMovies").generateAllMovies();
+        new MovieFactory(rootDir).generateAllMovies();
 
         for (Movie m : MoviesCollecion.movieCollection) {
             System.out.println(m.getName() + " " + m.getYearOfRelease() + " [ " + m.getActors() + " ]");
