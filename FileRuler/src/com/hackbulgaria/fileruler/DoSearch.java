@@ -25,10 +25,10 @@ public class DoSearch {
 
         try {
             // build a lucene index
-            System.out.println("rebuildIndexes");
+            System.out.println("rebuildIndexes --start");
             Indexer indexer = new Indexer();
             indexer.rebuildIndexes(collection);
-            System.out.println("rebuildIndexes done");
+            System.out.println("rebuildIndexes --done");
 
             // and retrieve the top 100 result
             System.out.println("performSearch on " + "\"" + searchPhrase + "\"");

@@ -1,4 +1,9 @@
+# Files excluded to upload
 *.class
+
+Test_sw.java
+Test_sw1.java
+
 
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
