@@ -9,11 +9,10 @@ import rita.RiWordNet;
 
 public class Synonyms {
 
-	public static HashMap<String, ArrayList<String>> getSynonyms(String word,
-			int maxNumber) throws IOException {
+	public static HashMap<String, ArrayList<String>> getSynonyms(String word) throws IOException {
 		// You have to install wordnet for this to work.
 		RiWordNet wordnet = new RiWordNet("/usr/share/wordnet-3.0/");
-		String[] synonyms = wordnet.getAllSynonyms(word, "n", maxNumber);
+		String[] synonyms = wordnet.getAllSynonyms(word, "n", 3);
 		HashMap<String, ArrayList<String>> synonymsHash = new HashMap<String, ArrayList<String>>();
 		synonymsHash.put(stem(wordnet, word), new ArrayList<String>(Arrays.asList(synonyms)));
 		return synonymsHash;

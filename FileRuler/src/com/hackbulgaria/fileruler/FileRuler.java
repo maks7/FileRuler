@@ -153,7 +153,7 @@ public class FileRuler extends JFrame {
 
                         if (!content2.isEmpty()) {
                             DoSearch search = new DoSearch(content2);
-                            ArrayList<Path> results = search.search(MovieFactory.movieCollection);
+                            ArrayList<Path> results = search.search(ImageFactory.imageCollection);
 
                             for (Path res : results) {
                                 listModel.addElement(res);
