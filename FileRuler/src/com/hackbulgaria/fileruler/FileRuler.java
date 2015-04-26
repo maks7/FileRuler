@@ -23,15 +23,6 @@ import javax.swing.border.EmptyBorder;
 
 import org.apache.commons.io.FileUtils;
 
-import com.hackbulgaria.fileruler.CrawlFiles;
-import com.hackbulgaria.fileruler.DoSearch;
-import com.hackbulgaria.fileruler.HDDCrawler;
-import com.hackbulgaria.fileruler.Movie;
-import com.hackbulgaria.fileruler.MovieFactory;
-import com.hackbulgaria.fileruler.MoviesCollecion;
-import com.hackbulgaria.fileruler.Test_sw;
-
-
 public class FileRuler extends JFrame {
 
     private JPanel contentPane;
@@ -102,26 +93,27 @@ public class FileRuler extends JFrame {
         setForeground(Color.YELLOW);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        
-        //setExtendedState(java.awt.Frame.MAXIMIZED_BOTH);
+
+        // setExtendedState(java.awt.Frame.MAXIMIZED_BOTH);
         setBounds(200, 200, 650, 400);
-        
-        //contentPane = new JPanel();
+
+        // contentPane = new JPanel();
         contentPane = new ContentPanel();
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         setContentPane(contentPane);
         contentPane.setLayout(null);
-        
-      //  contentPane.add();
-        contentPane.setBackground(new Color(153, 204, 255));;
-        
-        //setSize(500, 300);
-        
-//        Image bgimage = null;
-//        MediaTracker mt = new MediaTracker(this);
-//        bgimage = Toolkit.getDefaultToolkit().getImage(".\\res\backgr_images2.jpg");
-//        mt.addImage(bgimage, 0);
-        
+
+        // contentPane.add();
+        contentPane.setBackground(new Color(153, 204, 255));
+        ;
+
+        // setSize(500, 300);
+
+        // Image bgimage = null;
+        // MediaTracker mt = new MediaTracker(this);
+        // bgimage =
+        // Toolkit.getDefaultToolkit().getImage(".\\res\backgr_images2.jpg");
+        // mt.addImage(bgimage, 0);
 
         JLabel lblSearch = new JLabel("Enter name:");
         lblSearch.setFont(new Font("Tahoma", Font.PLAIN, 12));
@@ -153,29 +145,24 @@ public class FileRuler extends JFrame {
         comboBox.setModel(new DefaultComboBoxModel(new String[] { "Films", "Images" }));
         comboBox.setBounds(39, 85, 159, 20);
         contentPane.add(comboBox);
-        
+
         // Buttons click events
         ActionListener btnActionListener = new ActionListener() {
             public void actionPerformed(ActionEvent actionEvent) {
-                
-                
-              System.out.println("Scan was selected.");
+
+                System.out.println("Scan was selected.");
             }
-          };
-          btnNewButton.addActionListener(btnActionListener);  
-          
-          ActionListener btn1ActionListener = new ActionListener() {
-              public void actionPerformed(ActionEvent actionEvent) {
-                  
-                Test_sw test = new Test_sw();
-                test.setVisible(true);
-                    
+        };
+        btnNewButton.addActionListener(btnActionListener);
+
+        ActionListener btn1ActionListener = new ActionListener() {
+            public void actionPerformed(ActionEvent actionEvent) {
+
                 System.out.println("Find was selected.");
-              }
-            };
-            btnNewButton_1.addActionListener(btn1ActionListener);  
-          
+            }
+        };
+        btnNewButton_1.addActionListener(btn1ActionListener);
+
     }
-    
 
 }
