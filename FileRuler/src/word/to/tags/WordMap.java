@@ -4,15 +4,25 @@ import java.util.HashMap;
 
 
 public class WordMap{
-	private HashMap<String, HashMap<String, TagInfo>> words;
+	private HashMap<String, Pair> words;
+	
+	WordMap(){
+		words = new HashMap<String, Pair>();
+	}
 
 	public void addWord(Word word){
 		words.put(word.getName(), word.getInfo());
 	}
-	
+
+	@SuppressWarnings("unchecked")
 	public void changeTagInfo(String word,String tag, TagInfo info){
-		words.get(word).put(tag, info);
+		try{
+			((HashMap<String, TagInfo>) words.get(word).at(1)).put(tag, info);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
 	}
+
 }
 	
 

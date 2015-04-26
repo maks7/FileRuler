@@ -9,18 +9,18 @@ import org.json.JSONObject;
 
 public class MovieFactory {
 
-    String path;
+    private String path;
 
-    String actors;
-    String scenarist;
-    String director;
-    String runtime;
-    String ganre;
-    String yearOfRelease;
-    String name;
-    JSONObject movieContent;
-    String fileName;
-    Path filePath;
+    private String actors;
+    private String scenarist;
+    private String director;
+    private String runtime;
+    private String ganre;
+    private String yearOfRelease;
+    private String name;
+    private JSONObject movieContent;
+    private String fileName;
+    private Path filePath;
 
     static MoviesCollecion movieCollection = new MoviesCollecion();
 

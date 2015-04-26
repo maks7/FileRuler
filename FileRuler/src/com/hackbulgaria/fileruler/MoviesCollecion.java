@@ -9,10 +9,6 @@ public class MoviesCollecion {
         movieCollection.add(movie);
     }
 
-    // public CopyOnWriteArrayList<Movie> getMovies() {
-    // return movieCollection;
-    // }
-
     public ArrayList<Movie> getMovies() {
         return movieCollection;
     }

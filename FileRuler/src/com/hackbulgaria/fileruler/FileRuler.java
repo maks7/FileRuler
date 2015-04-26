@@ -3,7 +3,13 @@ package com.hackbulgaria.fileruler;
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
@@ -15,6 +21,8 @@ import javax.swing.JPanel;
 import javax.swing.JTextPane;
 import javax.swing.border.EmptyBorder;
 
+import org.apache.commons.io.FileUtils;
+
 public class FileRuler extends JFrame {
 
 	private JPanel contentPane;
@@ -23,8 +31,27 @@ public class FileRuler extends JFrame {
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
-		// new CrawlFiles(Paths.get("D:\\Downloads\\testMovies")).crawl();
-		new CrawlFiles(Paths.get("/home/stoilov/Downloads")).crawl();
+		File requests = new File("index-directory");
+		if (requests.exists()) {
+			try {
+				FileUtils.deleteDirectory(requests);
+			} catch (IOException e) {
+				System.out.println(e.getMessage());
+				e.printStackTrace();
+			}
+		}
+
+		// Change the root directory depends on the os
+		String rootDir = "test-data-films";
+		// if (new
+		// String(System.getProperty("os.name")).toLowerCase().indexOf("win") >=
+		// 0) {
+		// rootDir = "D:\\";
+		// } else {
+		// rootDir = "/";
+		// }
+
+		new CrawlFiles(Paths.get(rootDir)).crawl();
 
 		for (String string : HDDCrawler.listOfMovies) {
 			System.out.println(string);
@@ -34,15 +61,19 @@ public class FileRuler extends JFrame {
 			System.out.println(string);
 		}
 
-		new MovieFactory("/home/stoilov/Downloads").generateAllMovies();
+		new MovieFactory(rootDir).generateAllMovies();
 
 		for (Movie m : MoviesCollecion.movieCollection) {
-			System.out.println(m.name + " [ " + m.actors + " ]");
+			System.out.println(m.getName() + " " + m.getYearOfRelease() + " [ "
+					+ m.getActors() + " ]");
 		}
 
-		String searchPhrase = "Vin Diesel";
-		DoSearch search = new DoSearch(searchPhrase);
-		search.search(MovieFactory.movieCollection);
+		DoSearch search = new DoSearch("Vin Diesel,Paul Walker");
+		ArrayList<Path> results = search.search(MovieFactory.movieCollection);
+
+		for (Path res : results) {
+			System.out.println(res);
+		}
 
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -64,11 +95,27 @@ public class FileRuler extends JFrame {
 		setForeground(Color.YELLOW);
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+		// setExtendedState(java.awt.Frame.MAXIMIZED_BOTH);
 		setBounds(200, 200, 650, 400);
-		contentPane = new JPanel();
+
+		// contentPane = new JPanel();
+		contentPane = new ContentPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+
+		// contentPane.add();
+		contentPane.setBackground(new Color(153, 204, 255));
+		;
+
+		// setSize(500, 300);
+
+		// Image bgimage = null;
+		// MediaTracker mt = new MediaTracker(this);
+		// bgimage =
+		// Toolkit.getDefaultToolkit().getImage(".\\res\backgr_images2.jpg");
+		// mt.addImage(bgimage, 0);
 
 		JLabel lblSearch = new JLabel("Enter name:");
 		lblSearch.setFont(new Font("Tahoma", Font.PLAIN, 12));
@@ -101,5 +148,24 @@ public class FileRuler extends JFrame {
 				"Images" }));
 		comboBox.setBounds(39, 85, 159, 20);
 		contentPane.add(comboBox);
+
+		// Buttons click events
+		ActionListener btnActionListener = new ActionListener() {
+			public void actionPerformed(ActionEvent actionEvent) {
+
+				System.out.println("Scan was selected.");
+			}
+		};
+		btnNewButton.addActionListener(btnActionListener);
+
+		ActionListener btn1ActionListener = new ActionListener() {
+			public void actionPerformed(ActionEvent actionEvent) {
+
+				System.out.println("Find was selected.");
+			}
+		};
+		btnNewButton_1.addActionListener(btn1ActionListener);
+
 	}
+
 }
