@@ -31,7 +31,7 @@ public class DoSearch {
             System.out.println("rebuildIndexes done");
 
             // and retrieve the top 100 result
-            System.out.println("performSearch");
+            System.out.println("performSearch on " + "\"" + searchPhrase + "\"");
             SearchEngine se = new SearchEngine();
             TopDocs topDocs = se.performSearch(searchPhrase, 100);
 
