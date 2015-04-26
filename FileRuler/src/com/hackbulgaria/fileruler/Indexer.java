@@ -42,7 +42,6 @@ public class Indexer {
         System.out.println("Indexing movie: " + movie);
         IndexWriter writer = getIndexWriter(false);
         Document doc = new Document();
-        // doc.add(new StringField("id", movie.getId(), Field.Store.YES));
         doc.add(new StringField("name", movie.getName(), Field.Store.YES));
         doc.add(new StringField("yearOfRelease", String.format("%s", movie.getYearOfRelease()), Field.Store.YES));
         doc.add(new StringField("actors", movie.getActors().toString(), Field.Store.YES));
@@ -50,31 +49,34 @@ public class Indexer {
         doc.add(new StringField("director", movie.getDirector(), Field.Store.YES));
         doc.add(new StringField("runtime", String.format("%s", movie.getRuntime()), Field.Store.YES));
         doc.add(new StringField("path", String.format("%s", movie.getFilePath().toString()), Field.Store.YES));
-        // Add doc.add for different class vars.
-        // doc.add(new StringField("city", movie.getCity(), Field.Store.YES));
-        // String fullSearchableText = movie.getName() + " " + movie.getCity() +
-        // " " + movie.getDescription();
         String fullSearchableText = movie.toString();
         doc.add(new TextField("content", fullSearchableText, Field.Store.NO));
         writer.addDocument(doc);
     }
 
+    public void indexImage(Image image) throws IOException {
+        // TODO;
+    }
+
     public void rebuildIndexes(MoviesCollecion collection) throws IOException {
-        //
-        // Erase existing index
-        //
         getIndexWriter(true);
-        //
-        // Index all Accommodation entries
-        //
-        // CopyOnWriteArrayList<Movie> movies = collection.getMovies();
         ArrayList<Movie> movies = MovieFactory.movieCollection.getMovies();
+
         for (Movie movie : movies) {
             indexMovie(movie);
         }
-        //
-        // Don't forget to close the index writer when done
-        //
+
+        closeIndexWriter();
+    }
+
+    public void rebuildIndexes(ImageCollection collection) throws IOException {
+        getIndexWriter(true);
+        ArrayList<Image> image = ImageFactory.imageCollection.getImages();
+
+        for (Image img : image) {
+            indexImage(img);
+        }
+
         closeIndexWriter();
     }
 }
