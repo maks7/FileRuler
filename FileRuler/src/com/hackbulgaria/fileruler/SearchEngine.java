@@ -17,7 +17,6 @@ public class SearchEngine {
     private IndexSearcher searcher = null;
     private QueryParser parser = null;
 
-    /** Creates a new instance of SearchEngine */
     public SearchEngine() throws IOException {
         searcher = new IndexSearcher(DirectoryReader.open(FSDirectory.open(Paths.get("index-directory"))));
         parser = new QueryParser("content", new StandardAnalyzer());

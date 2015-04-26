@@ -1,7 +1,5 @@
 package com.hackbulgaria.fileruler;
 
-import java.io.File;
-
 public class ImageFactory {
 
     // private String path;
@@ -20,21 +18,21 @@ public class ImageFactory {
     static ImageCollection imageCollection = new ImageCollection();
 
     public ImageFactory(String filePathAndName) {
-        path = filePathAndName;
+        // path = filePathAndName;
     }
 
     public void run() {
-        fileName = new File(path).getName();
-        fileName = fileName.substring(0, fileName.lastIndexOf('.'));
+        // fileName = new File(path).getName();
+        // fileName = fileName.substring(0, fileName.lastIndexOf('.'));
 
         try {
-            String content = MovieUtils.getMovieContent(fileName);
+            // String content = MovieUtils.getMovieContent(fileName);
 
-            if (content != null) {
+            // if (content != null) {
 
-                // Get tags from IMAGGA (JSON)
-                // imageCollection.add(..);
-            }
+            // Get tags from IMAGGA (JSON)
+            // imageCollection.add(..);
+            // }
         } catch (Exception e) {
             System.out.println(e.getMessage());
             e.printStackTrace();

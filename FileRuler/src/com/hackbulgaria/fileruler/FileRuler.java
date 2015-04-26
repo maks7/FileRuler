@@ -29,9 +29,6 @@ public class FileRuler extends JFrame {
 
     private JPanel contentPane;
 
-    /**
-     * Launch the application.
-     */
     public static void main(String[] args) {
 
         EventQueue.invokeLater(new Runnable() {
@@ -46,9 +43,6 @@ public class FileRuler extends JFrame {
         });
     }
 
-    /**
-     * Create the frame.
-     */
     public FileRuler() {
         setTitle("FileRuler");
         setForeground(Color.WHITE);
@@ -172,68 +166,5 @@ public class FileRuler extends JFrame {
                 }
             }
         });
-
     }
 }
-
-// private JPanel contentPane;
-//
-// /**
-// * Launch the application.
-// */
-// public static void main(String[] args) {
-// File requests = new File("index-directory");
-// if (requests.exists()) {
-// try {
-// FileUtils.deleteDirectory(requests);
-// } catch (IOException e) {
-// System.out.println(e.getMessage());
-// e.printStackTrace();
-// }
-// }
-//
-// // Change the root directory depends on the os
-// String rootDir = "test-data-films";
-// // if (new
-// // String(System.getProperty("os.name")).toLowerCase().indexOf("win") >=
-// // 0) {
-// // rootDir = "D:\\";
-// // } else {
-// // rootDir = "/";
-// // }
-//
-// new CrawlFiles(Paths.get(rootDir)).crawl();
-// //
-// for (String string : HDDCrawler.listOfMovies) {
-// System.out.println(string);
-// }
-//
-// for (String string : HDDCrawler.listOfImages) {
-// System.out.println(string);
-// }
-//
-// new MovieFactory(rootDir).generateAllMovies();
-//
-// for (Movie m : MoviesCollecion.movieCollection) {
-// System.out.println(m.getName() + " " + m.getYearOfRelease() + " [ "
-// + m.getActors() + " ]");
-// }
-//
-// DoSearch search = new DoSearch("Vin Diesel,Paul Walker");
-// ArrayList<Path> results = search.search(MovieFactory.movieCollection);
-//
-// for (Path res : results) {
-// System.out.println(res);
-// }
-//
-// EventQueue.invokeLater(new Runnable() {
-// public void run() {
-// try {
-// FileRuler frame = new FileRuler();
-// frame.setVisible(true);
-// } catch (Exception e) {
-// e.printStackTrace();
-// }
-// }
-// });
-// }

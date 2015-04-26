@@ -17,16 +17,9 @@ public class CrawlFiles extends SimpleFileVisitor<Path> {
         this.startingPath = startingPath;
     }
 
-    // Print information about
-    // each type of file.
     @Override
     public FileVisitResult visitFile(Path file, BasicFileAttributes attr) {
         if (attr.isRegularFile()) {
-            // Here we just print file location
-            // Remove the printing part
-            // Do what you know to do with it
-            // The file is still Path Object
-            // System.out.format("Regular file: %s \n", file);
             HDDCrawler.fillTheCollection(file.toString());
         }
         return CONTINUE;
@@ -42,7 +35,6 @@ public class CrawlFiles extends SimpleFileVisitor<Path> {
         try {
             Files.walkFileTree(startingPath, pf);
         } catch (IOException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
     }

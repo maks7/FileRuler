@@ -8,10 +8,6 @@ import org.apache.lucene.document.Document;
 import org.apache.lucene.search.ScoreDoc;
 import org.apache.lucene.search.TopDocs;
 
-/**
- * 
- * @author John
- */
 public class DoSearch {
 
     private ArrayList<String> phrases;
