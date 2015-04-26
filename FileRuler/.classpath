@@ -5,6 +5,13 @@
 	<classpathentry kind="lib" path="lib/gson-2.2.4.jar"/>
 	<classpathentry kind="lib" path="lib/org.json-20120521.jar"/>
 	<classpathentry kind="lib" path="lib/commons-io-2.4.jar"/>
+<<<<<<< HEAD
 	<classpathentry kind="lib" path="C:/Program Files/Java/jdk1.8.0_25/src.zip"/>
+=======
+	<classpathentry kind="lib" path="lib/lucene-analyzers-common-5.1.0.jar"/>
+	<classpathentry kind="lib" path="lib/lucene-core-5.1.0.jar"/>
+	<classpathentry kind="lib" path="lib/lucene-demo-5.1.0.jar"/>
+	<classpathentry kind="lib" path="lib/lucene-queryparser-5.1.0.jar"/>
+>>>>>>> 78d3b8335289c1dc6ccad6c71c960d106332555f
 	<classpathentry kind="output" path="bin"/>
 </classpath>

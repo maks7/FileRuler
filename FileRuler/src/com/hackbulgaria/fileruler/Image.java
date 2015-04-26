@@ -5,35 +5,33 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class Image {
-	final String name;
-	final Path path;
-	final int width;
-	final int height;
-	final Date createdDate;
-	final ArrayList<String> imaggaTags;
-	ArrayList<String> fileRulerTags;
-	
-	public ArrayList<String> getImaggaTags() {
-		return imaggaTags;
-	}
+    public final String name;
+    public final Path path;
+    public final int width;
+    public final int height;
+    public final Date createdDate;
+    public final ArrayList<String> imaggaTags;
+    public ArrayList<String> fileRulerTags;
 
+    public ArrayList<String> getImaggaTags() {
+        return imaggaTags;
+    }
 
-	
-	public void addTagInFileRuler(String tag){
-		this.fileRulerTags.add(tag);
-	}
-	
-	public Image( Path path, String name, int width,int height,Date createdDate, ArrayList<String> imaggaTags ){
-		this.path = path;
-		this.name = name;
-		this.width = width;
-		this.height = height;
-		this.createdDate = getDateOfCreation(path);
-		this.imaggaTags = imaggaTags;
-	}
+    public void addTagInFileRuler(String tag) {
+        this.fileRulerTags.add(tag);
+    }
 
-	private Date getDateOfCreation(Path path) {
-		
-		return null;
-	}
+    public Image(Path path, String name, int width, int height, Date createdDate, ArrayList<String> imaggaTags) {
+        this.path = path;
+        this.name = name;
+        this.width = width;
+        this.height = height;
+        this.createdDate = getDateOfCreation(path);
+        this.imaggaTags = imaggaTags;
+    }
+
+    private Date getDateOfCreation(Path path) {
+
+        return null;
+    }
 }
