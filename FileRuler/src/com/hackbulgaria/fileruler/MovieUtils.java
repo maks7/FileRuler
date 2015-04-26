@@ -21,15 +21,16 @@ class MovieUtils {
             URL url = new URL(google + URLEncoder.encode(search, charset));
             Reader reader = new InputStreamReader(url.openStream(), charset);
             GoogleResults results = new Gson().fromJson(reader, GoogleResults.class);
-            reader.close();
 
-            if (results.getResponseData().getResults() == null || results.getResponseData().getResults().isEmpty()) {
+            System.out.println(results.toString());
+            Thread.sleep(3000);
+
+            if (results == null || results.getResponseData() == null || results.getResponseData().getResults() == null
+                    || results.getResponseData().getResults().isEmpty()) {
                 return null;
             }
 
-            System.out.println(results.toString());
-
-            Thread.sleep(3000);
+            reader.close();
 
             if (results.getResponseData() == null) {
                 return null;
