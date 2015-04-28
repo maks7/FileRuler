@@ -1,6 +1,7 @@
 package com.hackbulgaria.fileruler;
 
 import java.awt.Color;
+import java.awt.Desktop;
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -29,8 +30,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class FileRuler extends JFrame {
-
     private JPanel contentPane;
+    private String SELECTED = null;
 
     public static void main(String[] args) {
         loadLocalJSONs(Paths.get("test-data-json"));
@@ -111,7 +112,7 @@ public class FileRuler extends JFrame {
         setForeground(Color.WHITE);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setBounds(200, 200, 700, 500);
+        setBounds(250, 150, 920, 750);
         // this.getContentPane().setBackground(new Color(145, 104, 23));
 
         contentPane = new JPanel();
@@ -120,70 +121,95 @@ public class FileRuler extends JFrame {
         setContentPane(contentPane);
         contentPane.setLayout(null);
 
-        this.getContentPane().setBackground(new Color(111, 179, 154));
+        this.getContentPane().setBackground(new Color(245, 245, 245));
 
-        JLabel lblSearch = new JLabel("Enter name:");
-        lblSearch.setFont(new Font("Tahoma", Font.PLAIN, 20));
-        lblSearch.setBounds(40, 25, 110, 30);
+        JLabel logo = new JLabel("File Ruler");
+        logo.setFont(new Font("Tahoma", Font.BOLD, 50));
+        logo.setBounds(280, 20, 1300, 50);
+        contentPane.add(logo);
+
+        JLabel lblSearch = new JLabel("Search :");
+        lblSearch.setFont(new Font("Tahoma", Font.BOLD, 30));
+        lblSearch.setBounds(40, 120, 500, 30);
         contentPane.add(lblSearch);
 
         final JTextPane textPane = new JTextPane();
         textPane.setForeground(Color.BLACK);
-        textPane.setBounds(40, 55, 456, 20);
+        textPane.setBounds(340, 115, 450, 40);
+        textPane.setFont(new Font("Consolas", Font.PLAIN, 30));
         contentPane.add(textPane);
 
-        JButton btnNewButton = new JButton("Scan");
-        btnNewButton.setBounds(530, 11, 90, 40);
-        btnNewButton.setFont(new Font("Sans Serif", Font.PLAIN, 20));
-        contentPane.add(btnNewButton);
-
-        JButton btnNewButton_1 = new JButton("Find");
-        btnNewButton_1.setBounds(530, 51, 90, 40);
-        btnNewButton_1.setFont(new Font("Sans Serif", Font.PLAIN, 20));
-        contentPane.add(btnNewButton_1);
-
-        JLabel lblActors = new JLabel("Actors:");
-        lblActors.setFont(new Font("Tahoma", Font.PLAIN, 14));
-        lblActors.setBounds(95, 110, 30, 20);
-        contentPane.add(lblActors);
+        JButton btnFind = new JButton("Find");
+        btnFind.setBounds(750, 100, 90, 70);
+        btnFind.setFont(new Font("Consolas", Font.PLAIN, 25));
+        contentPane.add(btnFind);
 
         final DefaultListModel listModel = new DefaultListModel();
         final JList<String> list = new JList(listModel);
         list.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
         list.setLayoutOrientation(JList.HORIZONTAL_WRAP);
-        list.setBounds(40, 130, 600, 300);
+        list.setBounds(40, 200, 700, 450);
         contentPane.add(list);
 
+        JButton btnNewButton = new JButton("Scan");
+        btnNewButton.setBounds(750, 500, 110, 80);
+        btnNewButton.setFont(new Font("Consolas", Font.PLAIN, 25));
+        contentPane.add(btnNewButton);
+
+        JButton btnOpen = new JButton("Open");
+        btnOpen.setBounds(750, 350, 110, 80);
+        btnOpen.setFont(new Font("Consolas", Font.PLAIN, 25));
+        contentPane.add(btnOpen);
+
         JButton btnEdit = new JButton("Edit");
-        btnEdit.setBounds(530, 130, 90, 40);
+        btnEdit.setBounds(750, 250, 110, 80);
         btnEdit.setFont(new Font("Sans Serif", Font.PLAIN, 20));
         contentPane.add(btnEdit);
 
         final JComboBox<String> comboBox = new JComboBox<String>();
-        comboBox.setModel(new DefaultComboBoxModel<String>(new String[] { "Films", "Images" }));
-        comboBox.setBounds(40, 85, 80, 20);
+        comboBox.setModel(new DefaultComboBoxModel<String>(new String[] { "  Films" }));
+        comboBox.setBounds(180, 110, 150, 50);
+        comboBox.setFont(new Font("Sans Serif", Font.PLAIN, 30));
         contentPane.add(comboBox);
 
         // Scan the entire db to collect data for movies and images
         btnNewButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 // Change the root directory depends on the os
-                String rootDir = "test-data-films";
-                // if (new
-                // String(System.getProperty("os.name")).toLowerCase().indexOf("win")
-                // >=
-                // 0) {
-                // rootDir = "D:\\";
-                // } else {
-                // rootDir = "/";
-                // }
+                // String rootDir = "test-data-films";
+                String rootDir;
+                if (new String(System.getProperty("os.name")).toLowerCase().indexOf("win") >= 0) {
+                    rootDir = "D:\\";
+                } else {
+                    rootDir = "/";
+                }
 
                 new CrawlFiles(Paths.get(rootDir)).crawl();
                 new MovieFactory(rootDir).generateAllMovies();
             }
         });
 
-        btnNewButton_1.addActionListener(new ActionListener() {
+        btnOpen.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent arg0) {
+                DefaultListModel model = (DefaultListModel) list.getModel();
+                int selectedIndex = list.getSelectedIndex();
+
+                if (selectedIndex != -1) {
+                    SELECTED = (String) model.getElementAt(selectedIndex);
+                    try {
+                        String content = FileUtils.readFileToString(new File(SELECTED.replace(".avi", ".txt")));
+                        SELECTED = content.substring(content.lastIndexOf("|") + 1);
+                        Desktop.getDesktop().open(new File(SELECTED));
+                    } catch (IOException e) {
+                        // TODO Auto-generated catch block
+                        e.printStackTrace();
+                    }
+                }
+            }
+        });
+
+        btnFind.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 listModel.clear();
                 File requests = new File("index-directory");
@@ -196,7 +222,7 @@ public class FileRuler extends JFrame {
                     }
                 }
 
-                String option = (String) comboBox.getSelectedItem();
+                String option = comboBox.getSelectedItem().toString().trim();
 
                 switch (option) {
                     case "Films":
@@ -207,7 +233,17 @@ public class FileRuler extends JFrame {
                             ArrayList<Path> results = search.search(MovieFactory.movieCollection);
 
                             for (Path res : results) {
-                                listModel.addElement(res.toAbsolutePath());
+                                list.setCellRenderer(new CellRenderer());
+                                // JLabel renderer = (JLabel) new
+                                // CellRenderer().getListCellRendererComponent(list,
+                                // value,
+                                // index, isSelected, cellHasFocus);
+                                String renamed = res.toAbsolutePath().toString().replace(".txt", ".avi");
+                                listModel.addElement(String.format("%s", renamed));
+                            }
+
+                            if (results.size() == 0) {
+                                // Message
                             }
                         }
 
@@ -227,6 +263,7 @@ public class FileRuler extends JFrame {
                         break;
                     default:
                         throw new IllegalArgumentException("Invalid search file format");
+
                 }
             }
         });
